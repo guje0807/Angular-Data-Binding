@@ -1,0 +1,157 @@
+<!-- <h1> Book List </h1>
+
+<div [class] = "getclassBinding(1)" [style]="color">
+    <p [ngStyle]="getStyleBinding(1)">  Id: {{book.getBookId(1).id}}<br>
+    Book Name: {{book.getBookId(1).name}}<br>
+    Book Writer: {{book.getBookId(1).writer}}<br>
+    Book Price: {{book.getBookId(1).price}}</p>
+</div>
+
+<div [class] = "getclassBinding(2)">
+    <p [ngStyle]="getStyleBinding(2)">  Id: {{book.getBookId(2).id}}<br>
+    Book Name: {{book.getBookId(2).name}}<br>
+    Book Writer: {{book.getBookId(2).writer}}<br>
+    Book Price: {{book.getBookId(2).price}}</p>
+</div>
+
+<div *ngIf= "book.getbooks().length>0 then Books else NoBooks"></div>
+div *ngIf= "book.getbooks().length==0" then NoBooks></div --
+
+<-- Hidden Tag works when the condition is false
+<div [hidden]= "book.getbooks().length>0">There are {{book.getbooks().length}} Books in the List</div>
+<div [hidden]= "book.getbooks().length==0">There are no Books in the List</div> --
+
+<-- Ng Template--
+<ng-template #Books>
+    There are {{book.getbooks().length}} Books in the List
+</ng-template>
+<ng-template #NoBooks>
+    There are no Books in the List
+</ng-template>
+
+<-- NgSwitch--
+<div [ngSwitch]= "book.getbooks().length">
+    <span *ngSwitchCase="0">There are 0 books </span>
+    <span *ngSwitchCase="1">There are 1 books </span>
+    <span *ngSwitchDefault>There are many books </span>
+</div>
+
+<-- ngFor--
+
+<button (click)="addBook()" class="btn-success">Add Book</button>
+
+<ng-template #akash>
+    <div>
+        <ul>
+            <li *ngFor="let book of book.getbooks();index as i">
+               {{i + 1}} --- Book Name is : {{book.name}} <br>
+                                Book Price is : {{book.price}} <br>
+                                 Book Author is : {{book.writer}}
+            </li>
+        </ul>
+    </div>
+</ng-template>
+
+ngTemplateOutlet--
+<ng-template [ngTemplateOutlet]="akash"></ng-template>
+<ng-template [ngTemplateOutlet]="akash"></ng-template>
+ -->
+
+ <!-- Form Template for ng Model, ngModel class is used in the input tag of the HTML
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="m-4">
+                <div class="bg-primary text-white m-3 p-3">
+                    {{jsonBook}}
+                </div>
+                <div class="form-group">
+                    <label> Name: </label>
+                    <input required minlength="3" [(ngModel)]= "newBook.name" name = "bName" #name = "ngModel" type="text" class="form-control">
+                    <div class="alert alert-danger" *ngIf= "!name.valid && name.touched">Name is Reqired.Please Fill In.</div>
+                    <p *ngIf= "name.errors?.['required']">Name is Required</p>
+                    <p *ngIf= "name.errors?.['minlength']">Minimum of Three Characters are Required</p>
+                </div>
+                <div class="form-group">
+                    <label> Writer: </label>
+                    <input  required [(ngModel)]= "newBook.writer" name = "bWriter" #writer = "ngModel" type="text" class="form-control">
+                    <div class="alert alert-danger" *ngIf= "!writer.valid && writer.touched">Writer Name is Reqired.Please Fill In.</div>
+                </div>
+                <div class="form-group">
+                    <label> Price: </label>
+                    <input required [(ngModel)]= "newBook.price" name = "bPrice" #price = "ngModel" type="text" class="form-control">
+                    <div class="alert alert-danger" *ngIf= "!price.valid && price.touched">Price is Reqired.Please Fill In.</div>
+                </div>
+                <button (click) = "addBook(newBook)"  class="btn btn-primary">Submit</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div> -->
+
+<!-- ngForm
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="m-4">
+                    <form #form="ngForm" (ngSubmit)="submitForm(form)">
+                        <div class="bg-danger text-white"  *ngIf="formSubmit && form.invalid">
+                            There is a mistake in the Information provided.Please check.
+                        </div>
+                        <div class="bg-primary text-white m-3 p-3">
+                            {{jsonBook}}
+                        </div>
+                        <div class="form-group">
+                            <label> Name: </label>
+                            <input required minlength="3" [(ngModel)]= "newBook.name" name = "bName" #name = "ngModel" type="text" class="form-control">
+                            <div class="alert alert-danger" *ngIf= "(formSubmit || name.dirty)&& name.invalid">Name is Reqired.Please Fill In.</div>
+                        </div>
+                        <div class="form-group">
+                            <label> Writer: </label>
+                            <input  required [(ngModel)]= "newBook.writer" name = "bWriter" #writer = "ngModel" type="text" class="form-control">
+                            <div class="alert alert-danger" *ngIf= "(formSubmit || writer.dirty)&& name.invalid">Writer Name is Reqired.Please Fill In.</div>
+                        </div>
+                        <div class="form-group">
+                            <label> Price: </label>
+                            <input required [(ngModel)]= "newBook.price" name = "bPrice" #price = "ngModel" type="text" class="form-control">
+                            <div class="alert alert-danger" *ngIf= "(formSubmit || writer.dirty)&& name.invalid">Price is Reqired.Please Fill In.</div>
+                        </div>
+                        <button (click) = "addBook(newBook)"  class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+    
+            </div>
+    
+        </div>
+    
+    </div> -->
+
+    <!-- Reactive Forms
+
+   <div class="m-4">
+    <form [formGroup]= "bookForm">
+        <div class="form-group">
+            <label>Name:</label>
+            <input class="form-control" formControlName = "name">
+        </div>
+        <div class="form-group">
+            <label>Writer:</label>
+            <input class="form-control" formControlName = "writer">
+        </div>
+        <div class="form-group">
+            <label>Price:</label>
+            <input class="form-control" formControlName = "price">
+        </div>
+        <button (click) = "Submit()"  class="btn btn-primary">Submit</button>
+    </form>
+   </div> -->
+
+   <!-- Http Module-->
+
+   <app-post> 
+   </app-post>
